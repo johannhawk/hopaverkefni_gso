@@ -1,1 +1,1 @@
-# hopaverkefni_gs-
+# hopaverkefni_gsö

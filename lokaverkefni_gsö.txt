@@ -1,0 +1,50 @@
+a)	SELECT name, album_ID
+	FROM track
+	WHERE album_ID =  '4'
+
+b)	SELECT name, artist_ID
+	FROM track
+	WHERE artist_ID =  '3'
+
+c)	SELECT name, genre_ID
+	FROM track
+	WHERE genre_ID =  '5'
+
+d)	SELECT name, length
+	FROM track
+	WHERE length >5
+
+e)	SELECT name, publishing_date
+	FROM album
+	WHERE publishing_date >2010
+
+f)	
+
+g)	SELECT name
+	FROM track
+	ORDER BY length DESC 
+	LIMIT 5
+
+h)
+
+i)
+
+j)	SELECT name, album_genre, publisher_ID
+	FROM album
+	WHERE 1998 < publishing_date <2017
+	ORDER BY publisher_ID
+
+k)	SELECT name
+	FROM track
+	WHERE name LIKE  'A%'
+	OR name LIKE  '%n%'
+
+l)	SELECT name, 2017 - year_of_birth age
+	FROM artist
+
+m)	SELECT AVG( length ) 
+	FROM track
+
+n)
+
+o)

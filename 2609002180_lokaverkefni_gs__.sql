@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 05, 2017 at 10:02 AM
+-- Generation Time: May 06, 2017 at 12:32 AM
 -- Server version: 5.7.14-log
 -- PHP Version: 5.4.14
 
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `album` (
   `album_genre` int(11) DEFAULT NULL,
   `publisher_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `album_category` (`album_genre`),
-  KEY `publisher_ID` (`publisher_ID`)
+  KEY `publisher_ID` (`publisher_ID`),
+  KEY `album_genre` (`album_genre`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
@@ -42,13 +42,13 @@ CREATE TABLE IF NOT EXISTS `album` (
 --
 
 INSERT INTO `album` (`ID`, `name`, `publishing_date`, `album_genre`, `publisher_ID`) VALUES
-(1, 'Relapse', '19.05.2009', NULL, NULL),
-(2, 'The Sickness', '07.03.2000', NULL, NULL),
-(3, 'Thriller', '30.11.1982', NULL, NULL),
-(4, 'Made in Heaven', '06.11.1995', NULL, NULL),
-(5, 'Bangarang', '23.12.2011', NULL, NULL),
-(6, 'Asylum', '31.08.2010', NULL, NULL),
-(7, 'Bad', '31.08.1987', NULL, NULL);
+(1, 'Relapse', '2009', 1, 1),
+(2, 'The Sickness', '2000', 3, 2),
+(3, 'Thriller', '1982', 2, 3),
+(4, 'Made in Heaven', '1995', 4, 5),
+(5, 'Bangarang', '2011', 5, 4),
+(6, 'Asylum', '2010', 3, 2),
+(7, 'Bad', '1987', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ INSERT INTO `album` (`ID`, `name`, `publishing_date`, `album_genre`, `publisher_
 CREATE TABLE IF NOT EXISTS `artist` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `date_of_birth` char(10) NOT NULL,
+  `year_of_birth` tinytext NOT NULL,
   `description` varchar(50) DEFAULT NULL,
   `retirement_date` char(10) DEFAULT NULL,
   `preformer_category` int(11) DEFAULT NULL,
@@ -71,12 +71,12 @@ CREATE TABLE IF NOT EXISTS `artist` (
 -- Dumping data for table `artist`
 --
 
-INSERT INTO `artist` (`ID`, `name`, `date_of_birth`, `description`, `retirement_date`, `preformer_category`) VALUES
-(6, 'Eminem', '17.10.1972', 'Rap', '', 1),
-(7, 'Michael Jackson', '29.08.1958', 'Pop', '25.06.2009', 1),
-(8, 'Skrillex', '15.01.1988', 'Dubstep', '', 1),
-(9, 'David Draiman', '13.03.1973', 'Heavy Metal', '', 2),
-(10, 'Freddie Mercury', '05.09.1946', 'Rock', '24.11.1991', 2);
+INSERT INTO `artist` (`ID`, `name`, `year_of_birth`, `description`, `retirement_date`, `preformer_category`) VALUES
+(1, 'Eminem', '1972', 'Rap', '', 1),
+(2, 'Michael Jackson', '1958', 'Pop', '25.06.2009', 1),
+(3, 'Skrillex', '1988', 'Dubstep', '', 1),
+(4, 'David Draiman', '1973', 'Heavy Metal', '', 2),
+(5, 'Freddie Mercury', '1946', 'Rock', '24.11.1991', 2);
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ INSERT INTO `publisher` (`ID`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `track` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `length` char(10) NOT NULL,
+  `length` tinyint(4) NOT NULL,
   `author` varchar(25) NOT NULL,
   `language` varchar(15) DEFAULT NULL,
   `album_ID` int(11) DEFAULT NULL,
@@ -171,26 +171,26 @@ CREATE TABLE IF NOT EXISTS `track` (
 --
 
 INSERT INTO `track` (`ID`, `name`, `length`, `author`, `language`, `album_ID`, `artist_ID`, `genre_ID`) VALUES
-(1, 'Asylum', '4:36', 'Disturbed', 'English', NULL, NULL, NULL),
-(2, 'The Sickness', '4:38', 'Disturbed', 'English', NULL, NULL, NULL),
-(3, 'Bangarang', '3:35', 'Skrillex', 'English', NULL, NULL, NULL),
-(4, 'Kyoto', '3:21', 'Skrillex', 'English', NULL, NULL, NULL),
-(5, 'Thriller', '5:58', 'Temperton', 'English', NULL, NULL, NULL),
-(6, 'Beat It', '4:18', 'Michael Jackson', 'English', NULL, NULL, NULL),
-(7, 'Made in heaven', '5:25', 'Eddie Mercury', 'English', NULL, NULL, NULL),
-(8, 'Let me live', '4:45', 'Queen', 'English', NULL, NULL, NULL),
-(9, 'Mother love', '4:49', 'Mercury, May', 'English', NULL, NULL, NULL),
-(10, 'My mom', '5:19', 'Eminem ', 'English', NULL, NULL, NULL),
-(11, 'Hello', '4:08', 'Eminem', 'English', NULL, NULL, NULL),
-(12, 'Insane', '3:01', 'Eminem', 'English', NULL, NULL, NULL),
-(13, 'The devil''s den', '4:53', 'Skrillex', 'English', NULL, NULL, NULL),
-(14, 'Right on time', '4:05', 'Skrillex', 'English', NULL, NULL, NULL),
-(15, 'Beautiful', '6:32', 'Eminem', 'English', NULL, NULL, NULL),
-(16, 'Bad', '4:08', 'Michael Jackson', 'English', NULL, NULL, NULL),
-(17, 'Smooth Criminal', '4:20', 'Michael Jackson', 'English', NULL, NULL, NULL),
-(18, 'Man in the mirror', '3:55', 'Michael Jackson', 'English', NULL, NULL, NULL),
-(19, 'Dirty Diana', '4:42', 'Michael Jackson', 'English', NULL, NULL, NULL),
-(20, 'Speed Demon', '4:03', 'Michael Jackson', 'English', NULL, NULL, NULL);
+(1, 'Asylum', 4, 'Disturbed', 'English', 6, 4, 3),
+(2, 'The Sickness', 4, 'Disturbed', 'English', 2, 4, 3),
+(3, 'Bangarang', 3, 'Skrillex', 'English', 5, 3, 5),
+(4, 'Kyoto', 3, 'Skrillex', 'English', 5, 3, 5),
+(5, 'Thriller', 6, 'Temperton', 'English', 3, 2, 2),
+(6, 'Beat It', 4, 'Michael Jackson', 'English', 3, 2, 2),
+(7, 'Made in heaven', 5, 'Eddie Mercury', 'English', 4, 5, 4),
+(8, 'Let me live', 4, 'Queen', 'English', 4, 5, 4),
+(9, 'Mother love', 4, 'Mercury, May', 'English', 4, 5, 4),
+(10, 'My mom', 5, 'Eminem ', 'English', 1, 1, 1),
+(11, 'Hello', 4, 'Eminem', 'English', 1, 1, 1),
+(12, 'Insane', 3, 'Eminem', 'English', 1, 1, 1),
+(13, 'The devil''s den', 5, 'Skrillex', 'English', 5, 3, 5),
+(14, 'Right on time', 4, 'Skrillex', 'English', 5, 3, 5),
+(15, 'Beautiful', 6, 'Eminem', 'English', 1, 1, 1),
+(16, 'Bad', 4, 'Michael Jackson', 'English', 7, 2, 2),
+(17, 'Smooth Criminal', 4, 'Michael Jackson', 'English', 7, 2, 2),
+(18, 'Man in the mirror', 4, 'Michael Jackson', 'English', 7, 2, 2),
+(19, 'Dirty Diana', 4, 'Michael Jackson', 'English', 7, 2, 2),
+(20, 'Speed Demon', 4, 'Michael Jackson', 'English', 7, 2, 2);
 
 --
 -- Constraints for dumped tables
@@ -200,8 +200,8 @@ INSERT INTO `track` (`ID`, `name`, `length`, `author`, `language`, `album_ID`, `
 -- Constraints for table `album`
 --
 ALTER TABLE `album`
-  ADD CONSTRAINT `album_ibfk_1` FOREIGN KEY (`album_genre`) REFERENCES `category` (`ID`),
-  ADD CONSTRAINT `album_ibfk_2` FOREIGN KEY (`publisher_ID`) REFERENCES `publisher` (`ID`);
+  ADD CONSTRAINT `album_ibfk_2` FOREIGN KEY (`publisher_ID`) REFERENCES `publisher` (`ID`),
+  ADD CONSTRAINT `album_ibfk_3` FOREIGN KEY (`album_genre`) REFERENCES `genre` (`ID`);
 
 --
 -- Constraints for table `artist`

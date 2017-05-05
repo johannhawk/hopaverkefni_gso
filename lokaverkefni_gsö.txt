@@ -47,4 +47,43 @@ m)	SELECT AVG( length )
 
 n)
 
-o)
+o)	SELECT a.name, MAX( 2017 - a.year_of_birth ) age, t.name
+	FROM artist a
+	INNER JOIN track t ON t.artist_ID = a.ID
+	WHERE t.artist_ID =5
+
+1)	SELECT t.language, a.ID album_ID
+	FROM track t
+	INNER JOIN album a ON t.album_ID = a.ID
+	WHERE t.language =  'English'
+
+2)	SELECT t.language, a.ID album_ID
+	FROM track t
+	INNER JOIN album a ON t.album_ID = a.ID
+	WHERE t.language LIKE  'E%'
+
+3)	SELECT t.language, a.ID artist_ID
+	FROM track t
+	INNER JOIN artist a ON t.artist_ID = a.ID
+	WHERE t.language LIKE  'E%'
+
+4)	SELECT track.language, a.ID artist
+	FROM track
+	INNER JOIN artist a ON track.artist_ID = a.ID
+	WHERE track.language LIKE  '___lish'
+
+5)	SELECT t.album_ID, al.ID, t.artist_ID, ar.ID, t.genre_ID, g.ID
+	FROM track t
+	INNER JOIN album al ON al.ID = t.album_ID
+	INNER JOIN artist ar ON ar.ID = t.artist_ID
+	INNER JOIN genre g ON g.ID = t.genre_ID
+
+6)	SELECT t.album_ID, al.ID, t.artist_ID, ar.ID
+	FROM track t
+	INNER JOIN album al ON al.ID = t.album_ID
+	INNER JOIN artist ar ON ar.ID = t.artist_ID
+
+7)	SELECT t.artist_ID, ar.ID, t.genre_ID, g.ID
+	FROM track t
+	INNER JOIN artist ar ON ar.ID = t.artist_ID
+	INNER JOIN genre g ON g.ID = t.genre_ID

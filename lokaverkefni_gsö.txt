@@ -30,7 +30,12 @@ g)	SELECT name
 	ORDER BY length DESC 
 	LIMIT 5
 
-h)
+h)	SELECT genre.name, count( album_genre )
+	FROM genre
+	INNER JOIN album ON genre.ID = album.album_genre
+	GROUP BY album.album_genre
+	ORDER BY count( album_genre ) DESC
+	LIMIT 2 
 
 i)
 

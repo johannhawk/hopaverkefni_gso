@@ -37,7 +37,12 @@ h)	SELECT genre.name, count( album_genre )
 	ORDER BY count( album_genre ) DESC
 	LIMIT 2 
 
-i)
+i)	SELECT publisher.name, count( album.publisher_ID )
+	FROM publisher
+	INNER JOIN album ON publisher.ID = album.publisher_ID
+	GROUP BY album.publisher_ID
+	order by count( album.publisher_ID) asc
+	limit 1
 
 j)	SELECT name, album_genre, publisher_ID
 	FROM album

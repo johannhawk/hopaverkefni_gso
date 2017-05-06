@@ -60,7 +60,11 @@ l)	SELECT name, 2017 - year_of_birth age
 m)	SELECT AVG( length ) 
 	FROM track
 
-n)
+n)	SELECT album.name, count( publisher.ID )
+	FROM album
+	INNER JOIN publisher ON publisher.ID = album.publisher_ID
+	GROUP BY album.publisher_ID
+	HAVING count( publisher.ID ) >4
 
 o)	SELECT a.name, MAX( 2017 - a.year_of_birth ) age, t.name
 	FROM artist a

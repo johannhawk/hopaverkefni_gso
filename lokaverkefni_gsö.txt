@@ -18,7 +18,12 @@ e)	SELECT name, publishing_date
 	FROM album
 	WHERE publishing_date >2010
 
-f)	
+f)	SELECT album.name as "Album", artist.name, album.publishing_date, publisher.name AS "publisher"
+	FROM album
+	INNER JOIN publisher ON album.publisher_ID = publisher.ID
+	INNER JOIN genre ON album.album_genre = genre.ID
+	INNER JOIN artist ON genre.name = artist.description
+	WHERE publisher_ID <3
 
 g)	SELECT name
 	FROM track
